@@ -1,4 +1,5 @@
-import read, copy
+import read
+import copy
 from util import *
 from logical_classes import *
 
@@ -23,8 +24,10 @@ class KnowledgeBase(object):
         Args:
             fact (Fact or Rule): Fact or Rule we're asserting in the format produced by read.py
         """
+        if isinstance(fact, Fact) == True:
+            self.facts.append(fact)
         print("Asserting {!r}".format(fact))
-        
+
     def kb_ask(self, fact):
         """Ask if a fact is in the KB
 
@@ -34,4 +37,12 @@ class KnowledgeBase(object):
         Returns:
             ListOfBindings|False - ListOfBindings if result found, False otherwise
         """
+
+        end_result = ListOfBindings()
+
+        for i in self.facts:
+            my_binding = match(fact.statement, i.statement)
+            if isinstance(my_binding, Bindings) == True:
+                end_result.add_bindings(my_binding)
+        return end_result
         print("Asking {!r}".format(fact))
