@@ -41,8 +41,8 @@ class KnowledgeBase(object):
         end_result = ListOfBindings()
 
         for i in self.facts:
-            my_binding = match(fact.statement, i.statement)
-            if isinstance(my_binding, Bindings) == True:
-                end_result.add_bindings(my_binding)
+            my_bindings = match(fact.statement, i.statement)
+            if isinstance(my_bindings, Bindings) == True:
+                end_result.add_bindings(my_bindings)
         return end_result
         print("Asking {!r}".format(fact))
